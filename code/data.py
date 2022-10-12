@@ -1,7 +1,7 @@
 """
 University of Liege
 ELEN0062 - Introduction to machine learning
-Project 1 - Classification algorithms
+Project 1 - Classification algorithms 
 """
 import numpy as np
 from sklearn.utils import check_random_state
