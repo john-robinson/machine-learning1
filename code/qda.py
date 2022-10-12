@@ -48,13 +48,23 @@ class QuadraticDiscriminantAnalysis(BaseEstimator, ClassifierMixin):
         
         # ====================
         # mean vector of X for each class
-        self.means = np.array([np.mean(X[y == b], axis=1) for b in np.unique(y)])
+        self.means = np.array([np.mean(X[y == b], axis=0) for b in np.unique(y)])
         
         # covariance matrix of X for each class
         if self.lda:
             self.covs = np.array([np.cov(X[y == b], rowvar=False) for b in np.unique(y)])
         else: # QDA
             self.covs = np.array([np.cov(X[y == b], rowvar=False) for b in np.unique(y)])
+
+        print("Covariance matrices")
+        for mat in self.covs:
+            print(mat)
+        
+        print("Mean vectors")
+        i = 0
+        for mean in self.means:
+            print(i, " ", mean)
+            i+=1
             
         return self
 
@@ -115,4 +125,4 @@ if __name__ == "__main__":
     
     ncl = QuadraticDiscriminantAnalysis()
     ncl.fit(X_train, y_train)
-    print(ncl.means[0])
+    # print(ncl.means[0])
