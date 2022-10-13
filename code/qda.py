@@ -118,7 +118,7 @@ if __name__ == "__main__":
     n_points = 1500
     random_state = 5
     LDA = False
-    X, y = make_dataset1(n_points, random_state=random_state)
+    X, y = make_dataset2(n_points, random_state=random_state)
     
     # sample 1200 points to use as training set
     X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=TRAINING, test_size=TESTING, random_state = random_state)
