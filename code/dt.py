@@ -24,7 +24,7 @@ TESTING = 300
 def main():
     n_points = 1500
     random_state = 5
-    X, y = make_dataset2(n_points, random_state) # x = points, y = classe
+    X, y = make_dataset2(n_points, random_state)
     
     # sample 1200 points to use as training set
     X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=TRAINING, test_size=TESTING, random_state = random_state)
@@ -33,9 +33,9 @@ def main():
     # train the model
     record = []
     for depth in test_depth:
-        clf = DecisionTreeClassifier(max_depth=depth) # Tuning hyperparameters
-        clf.fit(X_train, y_train)     # Training model
-        record.append((clf.get_depth(), clf.score(X_train, y_train), clf.score(X_test, y_test))) # Testing model
+        clf = DecisionTreeClassifier(max_depth=depth)
+        clf.fit(X_train, y_train)
+        record.append((clf.get_depth(), clf.score(X_train, y_train), clf.score(X_test, y_test)))
         # plot the score for each depth using record
         plot_boundary("boundary" + str(clf.get_depth()), clf, X_train, y_train, title="Boundary of decision tree classifier " + str(clf.get_depth()))
     
@@ -46,18 +46,35 @@ def main():
     # plt.xlabel("Depth")
     # plt.ylabel("Score")
     # plt.legend()
-    # plt.savefig("score.pdf")
+    # plt.savefig("scoreDT.pdf")
 
-    final_res = []
-    for depth in test_depth:
-        record = []
-        for _ in range(20):
-            X, y = make_dataset2(n_points)
-            X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=TRAINING, test_size=TESTING, random_state = random_state)    
-            clf = DecisionTreeClassifier(max_depth=depth) # Tuning hyperparameters
-            clf.fit(X_train, y_train)     # Training model
-            record.append((clf.get_depth(), clf.score(X_train, y_train), clf.score(X_test, y_test))) # Testing model
-        final_res.append((clf.get_depth(), np.mean([x[2] for x in record]), np.std([x[2] for x in record])))
-    print(final_res)
+    # final_res = []
+    # for depth in test_depth:
+    #     record = []
+    #     for _ in range(20):
+    #         X, y = make_dataset2(n_points)
+    #         X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=TRAINING, test_size=TESTING, random_state = random_state)    
+    #         clf = DecisionTreeClassifier(max_depth=depth) 
+    #         clf.fit(X_train, y_train)
+    #         record.append((clf.get_depth(), clf.score(X_train, y_train), clf.score(X_test, y_test)))
+    #     final_res.append((clf.get_depth(), np.mean([x[2] for x in record]), np.std([x[2] for x in record])))
+    # print(final_res)
+    
+    # from sklearn.tree import export_graphviz
+    # from six import StringIO  
+    # from IPython.display import Image  
+    # import pydotplus
+    
+    # clf = DecisionTreeClassifier(max_depth=4) 
+    # clf.fit(X_train, y_train)
+    # record.append((clf.get_depth(), clf.score(X_train, y_train), clf.score(X_test, y_test)))
+    # dot_data = StringIO()
+    # export_graphviz(clf, out_file=dot_data,  
+    #                 filled=True, rounded=True,
+    #                 special_characters=True,class_names=['0','1'])
+    # graph = pydotplus.graph_from_dot_data(dot_data.getvalue())  
+    # graph.write_png('treeDT.png')
+    # Image(graph.create_png())
+    
 if __name__ == "__main__":
     main()
