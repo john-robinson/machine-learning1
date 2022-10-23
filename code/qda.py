@@ -112,7 +112,7 @@ def main():
     from data import make_dataset1
     from data import make_dataset2
     from plot import plot_boundary
-    TRAINING= 1200
+    TRAINING = 1200
     TESTING = 300
     n_points = 1500
     random_state = 5
@@ -120,10 +120,10 @@ def main():
     X, y = make_dataset1(n_points, random_state=random_state)
     
     # Decision boundary
-    X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=TRAINING, test_size=TESTING, random_state = random_state)
-    clf = QuadraticDiscriminantAnalysis()
-    clf.fit(X_train, y_train, lda = LDA)
-    plot_boundary("boundary" + "LDA" if LDA else "boundary" + "QDA" , clf, X_test, y_test)
+    # X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=TRAINING, test_size=TESTING, random_state = random_state)
+    # clf = QuadraticDiscriminantAnalysis()
+    # clf.fit(X_train, y_train, lda = LDA)
+    # plot_boundary("boundary" + "LDA" if LDA else "boundary" + "QDA" , clf, X_test, y_test)
     
     # Q 3.3
     # final_res = []
