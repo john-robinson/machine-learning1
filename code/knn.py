@@ -30,55 +30,54 @@ def main():
     n_neighbors = (1, 5, 25, 125, 625, 1200)
     
     # Decision boundary
-    # record = []
-    # for n in n_neighbors:
-    #     model = KNeighborsClassifier(n_neighbors=n) 
-    #     model.fit(X_train, y_train)
-    #     record.append((n, model.score(X_train, y_train), model.score(X_test, y_test)))
-    #     # plot the score for each depth using record
-    #     plot_boundary("boundaryKNN" + str(n), model, X_train, y_train, title="Boundary of k-Neighbors classifier " + str(n))
+    record = []
+    for n in n_neighbors:
+        model = KNeighborsClassifier(n_neighbors=n) 
+        model.fit(X_train, y_train)
+        record.append((n, model.score(X_train, y_train), model.score(X_test, y_test)))
+        # plot the score for each depth using record
+        plot_boundary("boundaryKNN" + str(n), model, X_train, y_train, title="Boundary of k-Neighbors classifier " + str(n))
 
     #create a side by side bar plot with the score for each depth
-    # plt.bar(np.arange(len(record)), [x[1] for x in record], width=0.2, label="Training score")
-    # plt.bar(np.arange(len(record)) + 0.2, [x[2] for x in record], width=0.2, label="Testing score")
-    # plt.xticks(np.arange(len(record)) + 0.1, [x[0] for x in record])
-    # plt.xlabel("n_neighbors")
-    # plt.ylabel("Score")
-    # plt.legend()
-    # plt.savefig("scoreKNN.pdf")
+    plt.bar(np.arange(len(record)), [x[1] for x in record], width=0.2, label="Training score")
+    plt.bar(np.arange(len(record)) + 0.2, [x[2] for x in record], width=0.2, label="Testing score")
+    plt.xticks(np.arange(len(record)) + 0.1, [x[0] for x in record])
+    plt.xlabel("n_neighbors")
+    plt.ylabel("Score")
+    plt.legend()
+    plt.savefig("scoreKNN.pdf")
     
     # Q 2.2
-    # final_res = []
-    # for n in n_neighbors:
-    #     record = []
-    #     for _ in range(5):
-    #         X, y = make_dataset2(n_points)
-    #         X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=TRAINING, test_size=TESTING, random_state = random_state)    
-    #         model = KNeighborsClassifier(n_neighbors=n)
-    #         model.fit(X_train, y_train)
-    #         record.append((n, model.score(X_train, y_train), model.score(X_test, y_test)))
-    #     final_res.append((n, np.mean([x[2] for x in record]), np.std([x[2] for x in record])))
-    # print(final_res)
+    final_res = []
+    for n in n_neighbors:
+        record = []
+        for _ in range(5):
+            X, y = make_dataset2(n_points)
+            X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=TRAINING, test_size=TESTING, random_state = random_state)    
+            model = KNeighborsClassifier(n_neighbors=n)
+            model.fit(X_train, y_train)
+            record.append((n, model.score(X_train, y_train), model.score(X_test, y_test)))
+        final_res.append((n, np.mean([x[2] for x in record]), np.std([x[2] for x in record])))
+    print(final_res)
 
     # Q 4.1 + 4.2
-    # tune the hyperparameter n_neighbors using best score on the test set
-    # final_res = []
-    # ds = 2
-    # for n in n_neighbors:
-    #     record = []
-    #     for _ in range(100):
-    #         if (ds == 1):
-    #             X, y = make_dataset1(n_points)
-    #         else:
-    #             X, y = make_dataset2(n_points)
-    #         X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=TRAINING, test_size=TESTING, random_state = random_state)    
-    #         model = KNeighborsClassifier(n_neighbors=n)
-    #         model.fit(X_train, y_train)
-    #         record.append((n, model.score(X_train, y_train), model.score(X_test, y_test)))
-    #     final_res.append((n, np.mean([x[2] for x in record]), np.std([x[2] for x in record])))
-    # # choose the best n_neighbors
-    # best_n = max(final_res, key=lambda x: x[1])
-    # print("Best n_neighbors for dataset" + str(ds) + " is", best_n)
+    final_res = []
+    ds = 2
+    for n in n_neighbors:
+        record = []
+        for _ in range(100):
+            if (ds == 1):
+                X, y = make_dataset1(n_points)
+            else:
+                X, y = make_dataset2(n_points)
+            X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=TRAINING, test_size=TESTING, random_state = random_state)    
+            model = KNeighborsClassifier(n_neighbors=n)
+            model.fit(X_train, y_train)
+            record.append((n, model.score(X_train, y_train), model.score(X_test, y_test)))
+        final_res.append((n, np.mean([x[2] for x in record]), np.std([x[2] for x in record])))
+    # choose the best n_neighbors
+    best_n = max(final_res, key=lambda x: x[1])
+    print("Best n_neighbors for dataset" + str(ds) + " is", best_n)
     
 if __name__ == "__main__":
     main()

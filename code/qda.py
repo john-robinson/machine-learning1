@@ -120,34 +120,34 @@ def main():
     X, y = make_dataset1(n_points, random_state=random_state)
     
     # Decision boundary
-    # X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=TRAINING, test_size=TESTING, random_state = random_state)
-    # clf = QuadraticDiscriminantAnalysis()
-    # clf.fit(X_train, y_train, lda = LDA)
-    # plot_boundary("boundary" + "LDA" if LDA else "boundary" + "QDA" , clf, X_test, y_test)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=TRAINING, test_size=TESTING, random_state = random_state)
+    clf = QuadraticDiscriminantAnalysis()
+    clf.fit(X_train, y_train, lda = LDA)
+    plot_boundary("boundary" + "LDA" if LDA else "boundary" + "QDA" , clf, X_test, y_test)
     
     # Q 3.3
-    # final_res = []
-    # for lda in range(2):
-    #     record = []
-    #     for _ in range(20):
-    #         X_1, y_1 = make_dataset1(n_points)
-    #         X_1_train, X_1_test, y_1_train, y_1_test = train_test_split(X_1, y_1, train_size=TRAINING, test_size=TESTING, random_state = random_state)  
+    final_res = []
+    for lda in range(2):
+        record = []
+        for _ in range(20):
+            X_1, y_1 = make_dataset1(n_points)
+            X_1_train, X_1_test, y_1_train, y_1_test = train_test_split(X_1, y_1, train_size=TRAINING, test_size=TESTING, random_state = random_state)  
             
-    #         clf = QuadraticDiscriminantAnalysis()
-    #         clf.fit(X_1_train, y_1_train, lda = lda)
-    #         record.append((1, "LDA" if lda == 1 else "QDA", clf.score(X_1_train, y_1_train), clf.score(X_1_test, y_1_test)))
-    #     final_res.append((1, "LDA" if lda == 1 else "QDA", np.mean([x[2] for x in record]), np.mean([x[3] for x in record]), np.std([x[3] for x in record])))
-    # for lda in range(2):
-    #     record = []
-    #     for _ in range(5):
-    #         X_2, y_2 = make_dataset2(n_points)
-    #         X_2_train, X_2_test, y_2_train, y_2_test = train_test_split(X_2, y_2, train_size=TRAINING, test_size=TESTING, random_state = random_state)
+            clf = QuadraticDiscriminantAnalysis()
+            clf.fit(X_1_train, y_1_train, lda = lda)
+            record.append((1, "LDA" if lda == 1 else "QDA", clf.score(X_1_train, y_1_train), clf.score(X_1_test, y_1_test)))
+        final_res.append((1, "LDA" if lda == 1 else "QDA", np.mean([x[2] for x in record]), np.mean([x[3] for x in record]), np.std([x[3] for x in record])))
+    for lda in range(2):
+        record = []
+        for _ in range(5):
+            X_2, y_2 = make_dataset2(n_points)
+            X_2_train, X_2_test, y_2_train, y_2_test = train_test_split(X_2, y_2, train_size=TRAINING, test_size=TESTING, random_state = random_state)
             
-    #         clf = QuadraticDiscriminantAnalysis()
-    #         clf.fit(X_2_train, y_2_train, lda = lda)
-    #         record.append((2, "LDA" if lda == 1 else "QDA", clf.score(X_2_train, y_2_train), clf.score(X_2_test, y_2_test)))
-    #     final_res.append((2, "LDA" if lda == 1 else "QDA", np.mean([x[2] for x in record]), np.mean([x[3] for x in record]), np.std([x[3] for x in record])))
-    # print(final_res)
+            clf = QuadraticDiscriminantAnalysis()
+            clf.fit(X_2_train, y_2_train, lda = lda)
+            record.append((2, "LDA" if lda == 1 else "QDA", clf.score(X_2_train, y_2_train), clf.score(X_2_test, y_2_test)))
+        final_res.append((2, "LDA" if lda == 1 else "QDA", np.mean([x[2] for x in record]), np.mean([x[3] for x in record]), np.std([x[3] for x in record])))
+    print(final_res)
     
 if __name__ == "__main__":
     main()
